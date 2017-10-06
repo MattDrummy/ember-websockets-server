@@ -1,0 +1,22 @@
+{
+  "name": "ember-websockets-server",
+  "version": "1.0.0",
+  "description": "A server to host websockets as a first attempt to connect an ember app with a websockets server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattDrummy/ember-websockets-server.git"
+  },
+  "author": "Matthew Drumheller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MattDrummy/ember-websockets-server/issues"
+  },
+  "homepage": "https://github.com/MattDrummy/ember-websockets-server#readme",
+  "dependencies": {
+    "ws": "^3.2.0"
+  }
+}
