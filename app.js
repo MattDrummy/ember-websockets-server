@@ -1,13 +1,15 @@
 const WebSocketServer = require('ws').Server;
 const WebSocket = require('ws')
 const rooom1 = new WebSocketServer({
-  port:7001,
+  port: 'https://thawing-stream-29526.herokuapp.com/',
+  path: 'room1'
   verifyClient: function(info){
     return true
   }
 });
 const room2 = new WebSocketServer({
-  port:7002,
+  server: 'https://thawing-stream-29526.herokuapp.com/',
+  path: 'room2'
   verifyClient: function(info){
     return true;
   }
