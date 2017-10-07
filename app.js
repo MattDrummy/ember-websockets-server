@@ -1,10 +1,57 @@
 const WebSocketServer = require('ws').Server;
-const ws = new WebSocketServer({port:7000});
+const WebSocket = require('ws')
+const rooom1 = new WebSocketServer({
+  port:7001,
+  verifyClient: function(info){
+    return true
+  }
+});
+const room2 = new WebSocketServer({
+  port:7002,
+  verifyClient: function(info){
+    return true;
+  }
+});
 
-ws.on('connection', function connection(ws){
-  ws.on('message', function incoming(message){
-    console.log('received %s', message);
+rooom1.broadcast = function broadcast(data){
+  rooom1.clients.forEach(function each(client){
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data)
+    }
+  })
+}
+rooom1.on('connection', function connection(ws, req){
+  ws.on('message', function incoming(data){
+    console.log('received %s', data);
+    rooom1.clients.forEach(function each(client){
+      if (client !== ws && client.readyState == WebSocket.OPEN) {
+        client.send(data)
+      }
+    })
+    ws.send(data)
   });
 
-  ws. send('Welcome to websockets!')
+  ws.send('Welcome to websockets!')
+})
+
+
+room2.broadcast = function broadcast(data){
+  room2.clients.forEach(function each(client){
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data)
+    }
+  })
+}
+room2.on('connection', function connection(ws){
+  ws.on('message', function incoming(data){
+    console.log('received %s', data);
+    room2.clients.forEach(function each(client){
+      if (client !== ws && client.readyState == WebSocket.OPEN) {
+        client.send(data)
+      }
+    })
+    ws.send(data)
+  });
+
+  ws.send('Welcome to websockets!')
 })
